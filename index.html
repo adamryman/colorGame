@@ -1,0 +1,36 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Color Game!</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="js/webcam.js"></script>
+
+</head>
+
+<body>
+	<div id="game">
+		<h1>~Color Game!~</h1>
+		<div id="my_camera">
+			<div id="selector">
+			</div>
+		</div>
+		<div id="control">
+			<p>Welcome to the Color Game. Click below to play!</p>
+		</div>
+	</div>
+	<div id="debug">
+		<button onclick="crop()">CROP</button>
+		<img id="cropped" width=105 height=105>
+		<canvas id="canvas" width=105 height=105></canvas>
+		<div id="results">Your captured image will appear here...</div>
+		<form>
+			<input type=button value="Take Snapshot" onClick="take_snapshot()">
+		</form>
+	</div>
+
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>

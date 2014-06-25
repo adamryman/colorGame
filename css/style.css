@@ -1,0 +1,44 @@
+body {
+   font-family: Helvetica, sans-serif;
+}
+h2, h3 {
+   margin-top:0;
+}
+form {
+   margin-top: 15px;
+}
+form > input {
+   margin-right: 15px;
+}
+#results {
+   float:right;
+   margin:20px;
+   padding:20px;
+   border:10px solid;
+   border-color: #00FFFF;
+}
+#my_camera {
+   float: left;
+   width:320px;
+   height:240px;
+   
+   margin-bottom: 20px;
+}
+#game {
+   margin-right:100%;
+}
+#selector {
+   border:1px solid;
+   width: 40px;
+   margin: 100px 139px;
+   height: 40px;
+   position:absolute;
+   float:left;
+   border-color: #00FFFF;
+}
+body{
+   background-color: white;
+}
+canvas{
+   border:1px solid red;
+}
