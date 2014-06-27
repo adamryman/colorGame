@@ -33,3 +33,19 @@ function crop() {
 	// this uses the canvas as the src for the cropped img element
 	document.getElementById("cropped").src=canvas.toDataURL();
 }
+
+function randomColor() {
+	var hex = ["0","1","2","3","4","5","6","7","8","9","A","B","C","D","E","F"];
+	var color = "";
+	for(var i =0; i < 6; i++){
+		color += hex[Math.floor(Math.random() * 16)];
+	}
+	console.log(color);
+	return color;
+}
+
+function changeColor(color) {
+	console.log(document.getElementById('game').style);
+	document.getElementById('game').style.backgroundColor = '#00FF00'
+	document.getElementById('game').style.backgroundColor = '#' + color;
+}
