@@ -21,11 +21,13 @@ form > input {
    float: left;
    width:320px;
    height:240px;
-   
    margin-bottom: 20px;
 }
+#control{
+
+}
 #game {
-   margin-right:100%;
+   display: inline-block;
 }
 #selector {
    border:1px solid;
