@@ -24,7 +24,8 @@ form > input {
    margin-bottom: 20px;
 }
 #control{
-
+   float: left;
+   display: inline-block;
 }
 #game {
    display: inline-block;
