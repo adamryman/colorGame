@@ -45,3 +45,8 @@ body{
 canvas{
    border:1px solid red;
 }
+
+#color{
+   width:20px;
+   height:20px;
+}

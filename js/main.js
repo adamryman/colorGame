@@ -4,6 +4,8 @@ Webcam.set({
 });
 Webcam.attach( '#my_camera' );
 
+var colorThief = new ColorThief();
+
 function take_snapshot() {
 	// take snapshot and get image data
 	var data_uri = Webcam.snap();
@@ -32,6 +34,7 @@ function crop() {
 	ctx.drawImage(img,140,100,40,40,0,0,40,40);
 	// this uses the canvas as the src for the cropped img element
 	document.getElementById("cropped").src=canvas.toDataURL();
+	return canvas.toDataURL();
 }
 
 function randomColor() {
@@ -49,3 +52,35 @@ function changeColor(color) {
 	document.getElementById('game').style.backgroundColor = '#00FF00'
 	document.getElementById('game').style.backgroundColor = '#' + color;
 }
+
+function countDown(){
+	changeColor(randomColor());
+	var count = 5;
+
+	var counter = setInterval(timer, 1000)
+
+	function timer(){
+		count = count - 1;
+		if (count <= 0){
+			clearInterval(counter);
+			take_snapshot();
+			var image = new Image();
+			image.src = crop();
+			var color = rgbToHex(colorThief.getColor(image));
+			console.log(color);
+			document.getElementById('color').style.backgroundColor = '#' + color;
+			return;
+		}
+		document.getElementById('counter').innerHTML = count;
+	}
+}
+
+function rgbToHex(rgb) {
+		r = rgb[0];
+		g = rgb[1];
+		b = rgb[2];
+    if (r > 255 || g > 255 || b > 255)
+        throw "Invalid color component";
+    return ((r << 16) | (g << 8) | b).toString(16);
+}
+

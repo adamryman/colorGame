@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/reset.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="lib/color-thief.js"></script>
 	<script type="text/javascript" src="js/webcam.js"></script>
 
 </head>
@@ -21,9 +22,12 @@
 		<div id="control">
 			test
 			<p>Welcome to the Color Game. Click below to play!</p>
-			<button onclick="changeColor(randomColor())">Change Color</button>
+			<button onclick="countDown()">Change Color</button>
+			<div id="color"></div>
+			<div id="counter">5</div>
 		</div>
 	</div>
+
 	<div id="debug">
 		<button onclick="crop()">CROP</button>
 		<img id="cropped" width=105 height=105>
