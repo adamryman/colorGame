@@ -43,7 +43,7 @@ function randomColor() {
 	for(var i =0; i < 6; i++){
 		color += hex[Math.floor(Math.random() * 16)];
 	}
-	console.log(color);
+
 	return color;
 }
 
@@ -54,6 +54,7 @@ function changeColor(color) {
 }
 
 function countDown(){
+	var gameColor = randomColor();
 	changeColor(randomColor());
 	var count = 5;
 
@@ -66,13 +67,39 @@ function countDown(){
 			take_snapshot();
 			var image = new Image();
 			image.src = crop();
-			var color = rgbToHex(colorThief.getColor(image));
-			console.log(color);
-			document.getElementById('color').style.backgroundColor = '#' + color;
+			var userColor = colorThief.getColor(image);
+			document.getElementById('color').style.backgroundColor = '#' + rgbToHex(userColor);
+			gameColor = hexToRgb(gameColor);
+
+			document.getElementById('color').innerHTML = distanceBetween(gameColor,userColor) + " || " + Math.abs((rgbToHue(gameColor) - (((rgbToHue(gameColor) - rgbToHue(userColor)) / 2))));
 			return;
 		}
 		document.getElementById('counter').innerHTML = count;
 	}
+}
+
+function distanceBetween(a, b){
+	console.log(a);
+	console.log(b);
+	var x = a[0] - b[0];
+	var y = a[1] - b[1];
+	var z = a[2] - b[2];
+
+	return Math.sqrt(x * x + y * y + z * z);
+}
+
+function rgbToHue(rgb){
+	var hue = Math.atan2(Math.sqrt(3) * (rgb[2] - rgb[1]), 2 * rgb[0] - rgb[1] - rgb[2]);
+	console.log(hue);
+	return hue;
+}
+
+function hexToRgb(hex) {
+	r = hex.substring(0,2);
+	g = hex.substring(2,4);
+	b = hex.substring(4,6);
+
+	return [parseInt(r,16),parseInt(g,16),parseInt(b,16)]	
 }
 
 function rgbToHex(rgb) {
