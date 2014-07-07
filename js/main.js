@@ -90,7 +90,6 @@ function distanceBetween(a, b){
 
 function rgbToHue(rgb){
 	var hue = Math.atan2(Math.sqrt(3) * (rgb[2] - rgb[1]), 2 * rgb[0] - rgb[1] - rgb[2]);
-	console.log(hue);
 	return hue;
 }
 
@@ -102,12 +101,67 @@ function hexToRgb(hex) {
 	return [parseInt(r,16),parseInt(g,16),parseInt(b,16)]	
 }
 
+function updateColorTable(){
+	var inputColor = document.getElementById('inputColor').value;
+	var gameColor = document.getElementById('gameColor').value;
+	var colorTable = document.getElementById('colorTest');
+	var gameColorRgb = hexToRgb(gameColor);
+	var inputColorRgb = hexToRgb(inputColor);
+	colorTable.rows[1].cells[1].innerHTML = gameColorRgb;
+	colorTable.rows[1].cells[2].innerHTML = inputColorRgb;
+	colorTable.rows[1].cells[1].style.backgroundColor = '#' + gameColor;
+	colorTable.rows[1].cells[2].style.backgroundColor = '#' + inputColor;
+
+	var gameColorHue = rgbToHue(gameColorRgb);
+	var inputColorHue = rgbToHue(inputColorRgb);
+
+	colorTable.rows[2].cells[1].innerHTML = gameColorHue;
+	colorTable.rows[2].cells[2].innerHTML = inputColorHue;
+
+
+	console.log("1st hue:" + gameColorHue);
+	console.log("1st hue to rgb:" + hueToRgb(gameColorHue));
+//	console.log("1st rgb to hex:" + rgbToHex(hueToRgb(gameColorHue)));
+
+	colorTable.rows[2].cells[1].style.backgroundColor = '#' + rgbToHex(hueToRgb(gameColorHue));
+	colorTable.rows[2].cells[2].style.backgroundColor = '#' + rgbToHex(hueToRgb(inputColorHue));
+	
+
+}
+
+//http://en.wikipedia.org/wiki/HSL_and_HSV#From_HSV
+function hueToRgb(hue){
+	hue = parseFloat(hue);
+	hue = hue + Math.PI;
+	var huePrime = (hue * (180 / Math.PI )) / 60;
+	console.log("huePrime: " + huePrime);
+	var x = (1 - Math.abs((huePrime % 2) - 1)) * 255;
+	if (huePrime >= 0 && huePrime < 1){
+		return [255,x,0];
+	} else if (huePrime >= 1 && huePrime < 2){
+		return [x,255,0];
+	} else if (huePrime >= 2 && huePrime < 3){
+		return [0,255,x];
+	} else if (huePrime >= 3 && huePrime < 4){
+		return [0,x,255];
+	} else if (huePrime >= 4 && huePrime < 5){
+		return [x,0,255];
+	} else if (huePrime >= 5 && huePrime < 6){
+		return [255,0,x];
+	} else {
+		return [0,0,0]
+	}
+}
+
 function rgbToHex(rgb) {
-		r = rgb[0];
-		g = rgb[1];
-		b = rgb[2];
+		r = parseInt(rgb[0]);
+		g = parseInt(rgb[1]);
+		b = parseInt(rgb[2]);
     if (r > 255 || g > 255 || b > 255)
         throw "Invalid color component";
     return ((r << 16) | (g << 8) | b).toString(16);
 }
 
+document.getElementById('inputColor').onkeyup = updateColorTable;
+document.getElementById('gameColor').onkeyup = updateColorTable;
+updateColorTable();
